@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SFT Calculator</title>
+    <style>
+        :root { --bg: #f8f9fa; --card: #ffffff; --text: #1a1a1a; --accent: #2563eb; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .card { background: var(--card); padding: 32px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 90%; max-width: 380px; border: 1px solid #eaeaea; }
+        h2 { margin: 0 0 20px 0; font-size: 18px; font-weight: 700; text-align: center; color: var(--text); letter-spacing: -0.5px; }
+        label { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; }
+        select, input { width: 100%; padding: 14px; margin-bottom: 20px; border: 1.5px solid #e5e7eb; border-radius: 12px; font-size: 16px; transition: all 0.2s; box-sizing: border-box; }
+        input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
+        button { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 12px; font-size: 16px; font-weight: 600; cursor: pointer; transition: opacity 0.2s; margin-bottom: 20px; }
+        button:active { opacity: 0.8; }
+        .result-container { background: #f1f5f9; padding: 20px; border-radius: 12px; text-align: center; display: none; }
+        .result-label { font-size: 12px; color: #64748b; text-transform: uppercase; margin-bottom: 4px; display: block; }
+        .result-val { font-size: 32px; font-weight: 800; color: var(--accent); }
+        .unit { font-size: 14px; color: #64748b; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>LOGO SFT CALCULATOR</h2>
+    
+    <label>Select Script</label>
+    <select id="logoType">
+        <option value="2.6">English (Ratio 2.6)</option>
+        <option value="3.6">Bangla (Ratio 3.6)</option>
+    </select>
+
+    <label>Logo Size (Inches)</label>
+    <input type="number" id="logoSize" placeholder="Enter height/size..." inputmode="decimal">
+
+    <button onclick="generateSFT()">Generate Area</button>
+
+    <div id="resultBox" class="result-container">
+        <span class="result-label">Calculated Area</span>
+        <span class="result-val" id="output">0.00</span>
+        <span class="unit">SFT</span>
+    </div>
+</div>
+
+<script>
+    function generateSFT() {
+        const size = document.getElementById('logoSize').value;
+        const ratio = document.getElementById('logoType').value;
+        const resultBox = document.getElementById('resultBox');
+        const output = document.getElementById('output');
+        
+        if (size > 0) {
+            // Formula: (Size/12) * Ratio * (Size/12)
+            const sft = (size / 12) * ratio * (size / 12);
+            output.innerText = sft.toFixed(2);
+            resultBox.style.display = 'block';
+        } else {
+            alert("Please enter a valid size.");
+            resultBox.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
